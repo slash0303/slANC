@@ -18,5 +18,3 @@ def animate(i):
 anim = FuncAnimation(fig, animate, frames=200, interval=50)
 
 plt.show()
-
-# animation 작동 안 함
