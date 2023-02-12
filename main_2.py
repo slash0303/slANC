@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 import scipy
 from eaxtension import LogE
+import winsound
 
 # pyaudio initalize
 CHUNK = 2000    # same as 'frames per buffer'
@@ -50,6 +51,10 @@ def animate(frame):
     line.set_data(x, y)
     LogE.d("animate", "animate function activated")
     return line
+
+# sfx
+file_name = "start_sfx.wav"
+winsound.PlaySound(file_name, winsound.SND_FILENAME)
 
 ani = FuncAnimation(fig, animate, init_func=init, frames=200, interval=10, blit=False)
 
