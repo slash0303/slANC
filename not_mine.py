@@ -22,14 +22,14 @@ def animate(i):
     y = np.absolute(y)
     y = y[range(int(n/2))]
     line.set_data(x, y)
-    return line
+    return line,
 
-CHUNK = 1024
+CHUNK = 2000
 RATE = 44100
 
 p=pyaudio.PyAudio()
 stream=p.open(format=pyaudio.paInt16,channels=1,rate=RATE,input=True,
-              frames_per_buffer=CHUNK)
+              frames_per_buffer=CHUNK,input_device_index=1)
 
 animation = animation.FuncAnimation(fig, animate, init_func=init,
                                frames=200, interval=10, blit=True)

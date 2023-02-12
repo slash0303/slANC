@@ -49,6 +49,13 @@ class LogE:
 		time_format = "%Y-%m-%d %H:%M:%S"
 		Log_time = str(time.strftime(time_format, tim))
 		print(f"{Log_time} | {Log_name} : {type(Log_text)} | {Log_text}")
+
+	@staticmethod
+	def T(Log_name, Log_text):
+		tim = time.localtime(time.time())
+		time_format = "%Y-%m-%d %H:%M:%S"
+		Log_time = str(time.strftime(time_format, tim))
+		print(f"{Log_time} | {Log_name} : {type(Log_text)}")
 		
 # json Class
 class jsonE:
