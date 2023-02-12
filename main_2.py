@@ -16,7 +16,7 @@ INPUT = True
 fig = plt.figure()
 ax = fig.add_subplot()
 ax.set_title("Fast Fourier Transfer")
-ax.set_xlim((0,5000))   # x
+ax.set_xlim((0,10000))   # x
 ax.set_xlabel("Frequency level")
 ax.set_ylim((0,1000))  # y
 ax.set_ylabel("Amplitude level")
@@ -30,7 +30,7 @@ stream = p.open(frames_per_buffer=CHUNK,
                 format=FORMAT,
                 channels=CHANNELS,
                 input=INPUT,
-                input_device_index=23,)
+                input_device_index=0,)
 
 def init():
     line.set_data([], [])
