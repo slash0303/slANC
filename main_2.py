@@ -24,6 +24,7 @@ ax.set_ylabel("Amplitude level")
 # matplotlib animation function
 line, = ax.plot([], [], lw=3)
 
+# pyAudio object generate
 p = pyaudio.PyAudio()
 stream = p.open(frames_per_buffer=CHUNK,
                 rate=RATE,
@@ -32,11 +33,13 @@ stream = p.open(frames_per_buffer=CHUNK,
                 input=INPUT,
                 input_device_index=0,)
 
+# FuncAnimation initalize function
 def init():
     line.set_data([], [])
     LogE.g("init", "init function activated")
     return line,
 
+# FuncAnimation main function
 def animate(frame):
     data = np.fromstring(stream.read(CHUNK), dtype=np.int16)
     n = len(data)
