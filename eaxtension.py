@@ -61,9 +61,8 @@ class LogE:
 class jsonE:
 	
 	#json dumps
-	def dumps(file_name: str, content):
-		name_len = len(file_name)
-		json_ext = file_name[name_len-5 : name_len]
+	def dumps(file_name: str, content, **kwargs):
+		json_ext = file_name[-5:]
 		
 		if json_ext == ".json":
 			pass
@@ -76,8 +75,7 @@ class jsonE:
 	
 	#json load
 	def load(file_name):
-		name_len = len(file_name)
-		json_ext = file_name[name_len-5 : name_len]
+		json_ext = file_name[-5:]
 		
 		if json_ext == ".json":
 			pass
