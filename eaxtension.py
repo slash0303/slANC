@@ -63,7 +63,7 @@ class jsonE:
 	#json dumps
 	def dumps(file_name: str, content, **kwargs):
 		json_ext = file_name[-5:]
-		
+
 		if json_ext == ".json":
 			pass
 		else:
@@ -71,18 +71,27 @@ class jsonE:
 			
 		with open(file_name, "w", encoding="utf-8") as json_file:
 			json.dump(content, json_file, ensure_ascii = False, indent=4)
-		LogE.g("dumps json", f"'{file_name}' is dumped")
+
+		try:
+			if kwargs["silent"] != True:
+				LogE.g("dumps json", f"'{file_name}' is dumped")
+		except KeyError:
+			LogE.g("dumps json", f"'{file_name}' is dumped")
 	
 	#json load
-	def load(file_name):
+	def load(file_name, **kwargs):
 		json_ext = file_name[-5:]
 		
 		if json_ext == ".json":
 			pass
 		else:
 			file_name = file_name + ".json"
-			
-		LogE.g("load json", f"'{file_name}' is loaded")
+		try:
+			if kwargs["silent"] != True:
+				LogE.g("load json", f"'{file_name}' is loaded")
+		except KeyError:
+			LogE.g("load json", f"'{file_name}' is loaded")
+
 		with open(file_name, "r") as json_file:
 			content = json.load(json_file)
 			return content
