@@ -3,8 +3,7 @@ import sys
 import pyaudio
 import numpy as np
 from matplotlib import pyplot as plt
-import librosa
-import sys
+import libr.osa
 
 class audio_handler:
 
