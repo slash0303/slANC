@@ -48,7 +48,6 @@ def animate(frame):
     y = np.abs(y)
     y = y[range(int(n / 2))]
     line.set_data(x, y)
-    LogE.d("animate", "animate function activated")
     return line
 
 ani = FuncAnimation(fig, animate, init_func=init, frames=200, interval=10, blit=False)
