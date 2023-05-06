@@ -55,10 +55,11 @@ def animate(frame):
     jsonE.dumps("fft_data", {"data" : str(data), "x" : str(x), "y" : str(y)})
     return line
 
-# sfx
+# sfx - start
 file_name = "res/start_sfx.wav"
 winsound.PlaySound(file_name, winsound.SND_FILENAME)
 
+# plotting animation
 ani = FuncAnimation(fig, animate, init_func=init, frames=200, interval=10, blit=False)
-
 plt.show()
+
