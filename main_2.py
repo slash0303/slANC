@@ -5,7 +5,9 @@ from matplotlib.animation import FuncAnimation
 import scipy
 from eaxtension import LogE
 from eaxtension import jsonE
+from eaxtension import timeE
 import winsound
+
 
 # pyaudio initalize
 CHUNK = 2000    # same as 'frames per buffer'
@@ -15,16 +17,27 @@ CHANNELS = 1
 INPUT = True
 
 # matplotlib axes initalize
-fig = plt.figure()
-ax = fig.add_subplot()
-ax.set_title("Fast Fourier Transform")
-ax.set_xlim((0,10000))   # x
-ax.set_xlabel("Frequency level")
-ax.set_ylim((0,1000))  # y
-ax.set_ylabel("Amplitude level")
+fig = plt.figure(figsize=(15, 5))
+
+ax_fft = fig.add_subplot(1, 2, 1)
+ax_fft.set_title("Fast Fourier Transform")
+ax_fft.set_xlim((0,10000))   # x
+ax_fft.set_xlabel("Frequency level")
+ax_fft.set_ylim((0,1000))  # y
+ax_fft.set_ylabel("Amplitude level")
+
+ax_phase = fig.add_subplot(1, 2, 2)
+ax_phase.set_title("Phase of sound")
+phase_x_sec = 0
+phase_x_space = 10
+ax_phase.set_xlim((phase_x_sec, phase_x_sec + phase_x_space))
+ax_phase.set_xlabel(f"Time ({phase_x_space}s)")
+ax_phase.set_ylim((-15000, 15000))
+ax_phase.set_ylabel("Amplitude")
 
 # matplotlib animation function
-line, = ax.plot([], [], lw=3)
+line_fft, = ax_fft.plot([], [], lw=3)
+line_phase, = ax_phase.plot([], [], lw=3)
 
 # pyAudio object generate
 p = pyaudio.PyAudio()
@@ -35,13 +48,13 @@ stream = p.open(frames_per_buffer=CHUNK,
                 input=INPUT,
                 input_device_index=0,)
 
-# FuncAnimation initalize function
-def init():
-    line.set_data([], [])
-    return line,
+# fft_animation initalize function
+def init_fft():
+    line_fft.set_data([], [])
+    return line_fft,
 
-# FuncAnimation main function
-def animate(frame):
+# fft animation for Funcanimation
+def animate_fft(frame):
     data = np.fromstring(stream.read(CHUNK), dtype=np.int16)
     n = len(data)
     # LogE.d("data", data)
@@ -51,16 +64,33 @@ def animate(frame):
     y = y[range(int(n / 2))]
     # LogE.d("x", x)
     # LogE.d("y", y)
-    line.set_data(x, y)
+    line_fft.set_data(x, y)
     # jsonE.dumps("fft_data", {"data" : str(data), "x" : str(x), "y" : str(y)})
-    
-    return line
+
+    return line_fft
+
+# phase function initalize function
+def init_phase():
+    line_phase.set_data([], [])
+    return line_phase,
+
+# phase animation for Funcanimation
+def animate_phase(frame):
+    data = np.fromstring(stream.read(CHUNK), dtype=np.int16)
+    n = len(data)
+    x = np.linspace(0, 10, int(n/2))
+    y = data[range(int(n/2))]
+    line_phase.set_data(x, y)
+
+    return line_phase
+
 
 # sfx - start
 file_name = "res/start_sfx.wav"
 winsound.PlaySound(file_name, winsound.SND_FILENAME)
 
 # plotting animation
-ani = FuncAnimation(fig, animate, init_func=init, frames=200, interval=10, blit=False)
+ani_fft = FuncAnimation(fig, animate_fft, init_func=init_fft, frames=200, interval=10, blit=False)
+ani_phase = FuncAnimation(fig, animate_phase, init_func=init_phase, frames=200, interval=10, blit=False)
 plt.show()
 
