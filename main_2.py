@@ -44,15 +44,16 @@ def init():
 def animate(frame):
     data = np.fromstring(stream.read(CHUNK), dtype=np.int16)
     n = len(data)
-    LogE.d("data", data)
+    # LogE.d("data", data)
     x = np.linspace(0, 44100 / 2, int(n/2))
     y = np.fft.fft(data) / n
     y = np.abs(y)
     y = y[range(int(n / 2))]
-    LogE.d("x", x)
-    LogE.d("y", y)
+    # LogE.d("x", x)
+    # LogE.d("y", y)
     line.set_data(x, y)
-    jsonE.dumps("fft_data", {"data" : str(data), "x" : str(x), "y" : str(y)})
+    # jsonE.dumps("fft_data", {"data" : str(data), "x" : str(x), "y" : str(y)})
+    
     return line
 
 # sfx - start
