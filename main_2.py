@@ -55,7 +55,7 @@ def init_fft():
 
 # fft animation for Funcanimation
 def animate_fft(frame):
-    data = np.fromstring(stream.read(CHUNK), dtype=np.int16)
+    data = np.frombuffer(stream.read(CHUNK), dtype=np.int16)
     n = len(data)
     # LogE.d("data", data)
     x = np.linspace(0, 44100 / 2, int(n/2))
@@ -76,7 +76,7 @@ def init_phase():
 
 # phase animation for Funcanimation
 def animate_phase(frame):
-    data = np.fromstring(stream.read(CHUNK), dtype=np.int16)
+    data = np.frombuffer(stream.read(CHUNK), dtype=np.int16)
     n = len(data)
     x = np.linspace(0, 10, int(n/2))
     y = data[range(int(n/2))]
@@ -90,7 +90,7 @@ file_name = "res/start_sfx.wav"
 winsound.PlaySound(file_name, winsound.SND_FILENAME)
 
 # plotting animation
-ani_fft = FuncAnimation(fig, animate_fft, init_func=init_fft, frames=200, blit=True)
-ani_phase = FuncAnimation(fig, animate_phase, init_func=init_phase, frames=200, blit=True)
+ani_fft = FuncAnimation(fig, animate_fft, init_func=init_fft, interval=50, frames=60, blit=True)
+ani_phase = FuncAnimation(fig, animate_phase, init_func=init_phase, interval=50, frames=60, blit=True)
 plt.show()
 
