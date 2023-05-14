@@ -67,7 +67,7 @@ def animate_fft(frame):
     line_fft.set_data(x, y)
     # jsonE.dumps("fft_data", {"data" : str(data), "x" : str(x), "y" : str(y)})
 
-    return line_fft
+    return line_fft,
 
 # phase function initalize function
 def init_phase():
@@ -82,7 +82,7 @@ def animate_phase(frame):
     y = data[range(int(n/2))]
     line_phase.set_data(x, y)
 
-    return line_phase
+    return line_phase,
 
 
 # sfx - start
@@ -90,7 +90,7 @@ file_name = "res/start_sfx.wav"
 winsound.PlaySound(file_name, winsound.SND_FILENAME)
 
 # plotting animation
-ani_fft = FuncAnimation(fig, animate_fft, init_func=init_fft, frames=200, interval=10, blit=False)
-ani_phase = FuncAnimation(fig, animate_phase, init_func=init_phase, frames=200, interval=10, blit=False)
+ani_fft = FuncAnimation(fig, animate_fft, init_func=init_fft, frames=200, blit=True)
+ani_phase = FuncAnimation(fig, animate_phase, init_func=init_phase, frames=200, blit=True)
 plt.show()
 

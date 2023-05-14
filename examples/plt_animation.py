@@ -1,20 +1,19 @@
+import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
-import numpy as np
-from eaxtension import LogE
 
-fig = plt.figure()
-ax = plt.axes(xlim = (0, 2), ylim = (-2, 2))
-line, = ax.plot([], [], lw=3)
+fig, ax = plt.subplots()
+line, = ax.plot([], [], lw=2)
 
-def animate(i):
-    x = np.linspace(0, 4, 1000)
-    y = np.sin(2 * np.pi * (x - 0.01 * i))
-    line.set_data(x, y)
-    LogE.g("Line,", line,)
-    LogE.d("Line", line)
+def init():
+    line.set_data([], [])
     return line,
 
-anim = FuncAnimation(fig, animate, frames=200, interval=50)
+def update(frame):
+    x = np.linspace(0, 2*np.pi, 100)
+    y = np.sin(2*np.pi*(x - 0.01*frame))
+    line.set_data(x, y)
+    return line,
 
+ani = FuncAnimation(fig, update, frames=100, init_func=init, blit=True)
 plt.show()
