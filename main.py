@@ -1,5 +1,6 @@
 import pyaudio
 import numpy as np
+from numpy import fft
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 import scipy
@@ -7,7 +8,7 @@ from eaxtension import LogE
 from eaxtension import jsonE
 from eaxtension import timeE
 import winsound
-
+import time as t
 
 # pyaudio initalize
 CHUNK = 2000    # same as 'frames per buffer'
@@ -55,17 +56,21 @@ def init_fft():
 
 # fft animation for Funcanimation
 def animate_fft(frame):
+    start = t.time()
     data = np.frombuffer(stream.read(CHUNK), dtype=np.int16)
     n = len(data)
     # LogE.d("data", data)
     x = np.linspace(0, 44100 / 2, int(n/2))
-    y = np.fft.fft(data) / n
+    y = fft.fft(data) / n
     y = np.abs(y)
     y = y[range(int(n / 2))]
     # LogE.d("x", x)
     # LogE.d("y", y)
     line_fft.set_data(x, y)
     # jsonE.dumps("fft_data", {"data" : str(data), "x" : str(x), "y" : str(y)})
+    end = t.time()
+    cal_time= end-start
+    print(cal_time)
 
     return line_fft,
 
@@ -84,7 +89,6 @@ def animate_phase(frame):
 
     return line_phase,
 
-
 # sfx - start
 file_name = "res/start_sfx.wav"
 winsound.PlaySound(file_name, winsound.SND_FILENAME)
@@ -93,4 +97,3 @@ winsound.PlaySound(file_name, winsound.SND_FILENAME)
 ani_fft = FuncAnimation(fig, animate_fft, init_func=init_fft, interval=50, frames=60, blit=True)
 ani_phase = FuncAnimation(fig, animate_phase, init_func=init_phase, interval=50, frames=60, blit=True)
 plt.show()
-
