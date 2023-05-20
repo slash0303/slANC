@@ -2,7 +2,7 @@ from eaxtension import jsonE
 from eaxtension import LogE
 import numpy as np
 
-data = jsonE.load("fft_data.json")
+data = jsonE.load("../fft_data.json")
 
 LogE.d("y data - length", len(list(data["y"])))         # TODO json에 저장된 데이터 list화 시키고 튀는 값 추출하기
 LogE.d("x data - length", len(list(data["x"])))
