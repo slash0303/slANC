@@ -4,14 +4,14 @@ from numpy import fft
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 import scipy
-from eaxtension import LogE
+# from eaxtension import LogE
 from eaxtension import jsonE
-from eaxtension import timeE
+# from eaxtension import timeE
 import winsound
 import time as t
 
 # pyaudio initalize
-CHUNK = 2000    # same as 'frames per buffer'
+CHUNK = 1024    # same as 'frames per buffer'
 RATE = 44100    # sampling rate
 FORMAT = pyaudio.paInt16
 CHANNELS = 1
@@ -67,7 +67,7 @@ def animate_fft(frame):
     # LogE.d("x", x)
     # LogE.d("y", y)
     line_fft.set_data(x, y)
-    # jsonE.dumps("fft_data", {"data" : str(data), "x" : str(x), "y" : str(y)})
+    jsonE.dumps("fft_data", {"data" : str(data), "x" : str(x), "y" : str(y), "pyaudio": str(stream.read(CHUNK))})
     end = t.time()
     cal_time= end-start
     print(cal_time)

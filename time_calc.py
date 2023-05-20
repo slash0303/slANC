@@ -2,7 +2,7 @@ lis = []
 
 while True:
     a = float(input())
-    if a == 345:        # exit code
+    if a == -1:        # exit code
         break
     else:
         lis.append(a)
