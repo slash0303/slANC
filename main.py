@@ -53,27 +53,35 @@ def noise_plot(x_data:dict):
     fig = plt.figure()
     ax = fig.add_subplot()
     ax.set_title("Count of noise detection")
+    ax.set_xlim((0, 3000))
     ax.set_xlabel("Frequency level")
     ax.set_ylabel("count")
-    ax.hist(x_data)
+    ax.hist(x_data, bins=3000)
     plt.show()
 
 # main
 noise_data = defaultdict(int)
 noise_list = []
+
+max_time = 30   # sec
+
 try:
+    start_time = t.time()
     while True:
+        mes_time = start_time - t.time()
+        if mes_time > max_time:
+            break
         fft_data = audio_fft()
         for i, y in enumerate(fft_data["y"]):
             if y > 3:
                 data_x = fft_data["x"][i]
-                print(i, ",", data_x)
+                # print(i, ",", data_x)
                 try: noise_data[data_x] += 1
                 except: noise_data[data_x] = 1
                 noise_list.append(data_x)
         # fft_plot()
 except:
     noise_data["noise_list"] = noise_list
-    print(noise_data)
+    # print(noise_data)
     jsonE.dumps("noise_data", noise_data)
     noise_plot(noise_list)
