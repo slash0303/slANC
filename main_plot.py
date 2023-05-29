@@ -24,7 +24,7 @@ ax_fft = fig.add_subplot(1, 2, 1)
 ax_fft.set_title("Fast Fourier Transform")
 ax_fft.set_xlim((0,10000))   # x
 ax_fft.set_xlabel("Frequency level")
-ax_fft.set_ylim((0,1000))  # y
+ax_fft.set_ylim((0,500))  # y
 ax_fft.set_ylabel("Amplitude level")
 
 ax_phase = fig.add_subplot(1, 2, 2)

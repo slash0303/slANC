@@ -5,6 +5,8 @@ from numpy import fft
 import scipy
 import winsound
 import time as t
+from eaxtension import jsonE
+from collections import defaultdict
 
 # pyaudio initalize
 CHUNK = 1024    # same as 'frames per buffer'
@@ -26,27 +28,52 @@ def audio_fft():
     # start = t.time()
     data = np.frombuffer(stream.read(CHUNK), dtype=np.int16)
     n = len(data)
-    x = np.linspace(0, 44100 / 2, int(n / 2))
+    x = np.linspace(0, 44100 / 2, n//2)
     y = fft.fft(data) / n
     y = np.abs(y)
     y = y[range(int(n / 2))]
     # end = t.time()
     # cal_time = end - start
     # print(cal_time)
-
+    # TODO 주파수 대역 좁히고 밀도 올리기
     return {"x": x, "y": y}
 
-# main
-while True:
-    fft_data = audio_fft()
-    for y in fft_data["y"]:
-        if y > 100:
-            print(list(fft_data["y"]).index(y))
-
+def fft_plot():
     fig = plt.figure()
     ax = fig.add_subplot()
+    ax.set_title("Fast Fourier Transform")
     ax.set_xlim(0, 10000)
+    ax.set_xlabel("Frequency level")
     ax.set_ylim(0, 1000)
+    ax.set_ylabel("Amplitude level")
     ax.plot(fft_data["x"], fft_data["y"])
-
     plt.show()
+
+def noise_plot(x_data:dict):
+    fig = plt.figure()
+    ax = fig.add_subplot()
+    ax.set_title("Count of noise detection")
+    ax.set_xlabel("Frequency level")
+    ax.set_ylabel("count")
+    ax.hist(x_data)
+    plt.show()
+
+# main
+noise_data = defaultdict(int)
+noise_list = []
+try:
+    while True:
+        fft_data = audio_fft()
+        for i, y in enumerate(fft_data["y"]):
+            if y > 3:
+                data_x = fft_data["x"][i]
+                print(i, ",", data_x)
+                try: noise_data[data_x] += 1
+                except: noise_data[data_x] = 1
+                noise_list.append(data_x)
+        # fft_plot()
+except:
+    noise_data["noise_list"] = noise_list
+    print(noise_data)
+    jsonE.dumps("noise_data", noise_data)
+    noise_plot(noise_list)
