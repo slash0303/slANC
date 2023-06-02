@@ -1,0 +1,162 @@
+{
+    "all_input_device": {
+        "0": {
+            "index": 0,
+            "structVersion": 2,
+            "name": "Microsoft 사운드 매퍼 - Input",
+            "hostApi": 0,
+            "maxInputChannels": 2,
+            "maxOutputChannels": 0,
+            "defaultLowInputLatency": 0.09,
+            "defaultLowOutputLatency": 0.09,
+            "defaultHighInputLatency": 0.18,
+            "defaultHighOutputLatency": 0.18,
+            "defaultSampleRate": 44100.0
+        },
+        "1": {
+            "index": 1,
+            "structVersion": 2,
+            "name": "Microphone(USB Audio Device)",
+            "hostApi": 0,
+            "maxInputChannels": 1,
+            "maxOutputChannels": 0,
+            "defaultLowInputLatency": 0.09,
+            "defaultLowOutputLatency": 0.09,
+            "defaultHighInputLatency": 0.18,
+            "defaultHighOutputLatency": 0.18,
+            "defaultSampleRate": 44100.0
+        },
+        "5": {
+            "index": 5,
+            "structVersion": 2,
+            "name": "주 사운드 캡처 드라이버",
+            "hostApi": 1,
+            "maxInputChannels": 2,
+            "maxOutputChannels": 0,
+            "defaultLowInputLatency": 0.12,
+            "defaultLowOutputLatency": 0.0,
+            "defaultHighInputLatency": 0.24,
+            "defaultHighOutputLatency": 0.0,
+            "defaultSampleRate": 44100.0
+        },
+        "6": {
+            "index": 6,
+            "structVersion": 2,
+            "name": "Microphone(USB Audio Device)",
+            "hostApi": 1,
+            "maxInputChannels": 1,
+            "maxOutputChannels": 0,
+            "defaultLowInputLatency": 0.12,
+            "defaultLowOutputLatency": 0.0,
+            "defaultHighInputLatency": 0.24,
+            "defaultHighOutputLatency": 0.0,
+            "defaultSampleRate": 44100.0
+        },
+        "12": {
+            "index": 12,
+            "structVersion": 2,
+            "name": "Microphone(USB Audio Device)",
+            "hostApi": 2,
+            "maxInputChannels": 1,
+            "maxOutputChannels": 0,
+            "defaultLowInputLatency": 0.003,
+            "defaultLowOutputLatency": 0.0,
+            "defaultHighInputLatency": 0.01,
+            "defaultHighOutputLatency": 0.0,
+            "defaultSampleRate": 48000.0
+        },
+        "14": {
+            "index": 14,
+            "structVersion": 2,
+            "name": "머리에 거는 수화기 (@System32\\drivers\\bthhfenum.sys,#2;%1 Hands-Free%0\r\n;(한빈의 Buds2 Pro))",
+            "hostApi": 3,
+            "maxInputChannels": 1,
+            "maxOutputChannels": 0,
+            "defaultLowInputLatency": 0.01,
+            "defaultLowOutputLatency": 0.01,
+            "defaultHighInputLatency": 0.08533333333333333,
+            "defaultHighOutputLatency": 0.08533333333333333,
+            "defaultSampleRate": 8000.0
+        },
+        "18": {
+            "index": 18,
+            "structVersion": 2,
+            "name": "Input ()",
+            "hostApi": 3,
+            "maxInputChannels": 2,
+            "maxOutputChannels": 0,
+            "defaultLowInputLatency": 0.01,
+            "defaultLowOutputLatency": 0.01,
+            "defaultHighInputLatency": 0.08533333333333333,
+            "defaultHighOutputLatency": 0.08533333333333333,
+            "defaultSampleRate": 44100.0
+        },
+        "21": {
+            "index": 21,
+            "structVersion": 2,
+            "name": "Input (@System32\\drivers\\bthhfenum.sys,#4;%1 Hands-Free HF Audio%0\r\n;(한빈의 S21+))",
+            "hostApi": 3,
+            "maxInputChannels": 1,
+            "maxOutputChannels": 0,
+            "defaultLowInputLatency": 0.01,
+            "defaultLowOutputLatency": 0.01,
+            "defaultHighInputLatency": 0.08533333333333333,
+            "defaultHighOutputLatency": 0.08533333333333333,
+            "defaultSampleRate": 8000.0
+        },
+        "23": {
+            "index": 23,
+            "structVersion": 2,
+            "name": "마이크 (USB Audio Device)",
+            "hostApi": 3,
+            "maxInputChannels": 1,
+            "maxOutputChannels": 0,
+            "defaultLowInputLatency": 0.01,
+            "defaultLowOutputLatency": 0.01,
+            "defaultHighInputLatency": 0.08533333333333333,
+            "defaultHighOutputLatency": 0.08533333333333333,
+            "defaultSampleRate": 44100.0
+        }
+    },
+    "only_mic": {
+        "1": {
+            "index": 1,
+            "structVersion": 2,
+            "name": "Microphone(USB Audio Device)",
+            "hostApi": 0,
+            "maxInputChannels": 1,
+            "maxOutputChannels": 0,
+            "defaultLowInputLatency": 0.09,
+            "defaultLowOutputLatency": 0.09,
+            "defaultHighInputLatency": 0.18,
+            "defaultHighOutputLatency": 0.18,
+            "defaultSampleRate": 44100.0
+        },
+        "6": {
+            "index": 6,
+            "structVersion": 2,
+            "name": "Microphone(USB Audio Device)",
+            "hostApi": 1,
+            "maxInputChannels": 1,
+            "maxOutputChannels": 0,
+            "defaultLowInputLatency": 0.12,
+            "defaultLowOutputLatency": 0.0,
+            "defaultHighInputLatency": 0.24,
+            "defaultHighOutputLatency": 0.0,
+            "defaultSampleRate": 44100.0
+        },
+        "12": {
+            "index": 12,
+            "structVersion": 2,
+            "name": "Microphone(USB Audio Device)",
+            "hostApi": 2,
+            "maxInputChannels": 1,
+            "maxOutputChannels": 0,
+            "defaultLowInputLatency": 0.003,
+            "defaultLowOutputLatency": 0.0,
+            "defaultHighInputLatency": 0.01,
+            "defaultHighOutputLatency": 0.0,
+            "defaultSampleRate": 48000.0
+        }
+    }
+}
