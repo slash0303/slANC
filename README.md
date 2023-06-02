@@ -1,2 +1,0 @@
-# slANC
-ANC application
