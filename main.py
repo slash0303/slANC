@@ -24,6 +24,7 @@ stream = p.open(frames_per_buffer=CHUNK,
                 input=INPUT,
                 input_device_index=0,)
 
+# fft
 def audio_fft():
     # start = t.time()
     data = np.frombuffer(stream.read(CHUNK), dtype=np.int16)
@@ -38,6 +39,7 @@ def audio_fft():
     # TODO 주파수 대역 좁히고 밀도 올리기
     return {"x": x, "y": y}
 
+# plot graph about fft data
 def fft_plot():
     fig = plt.figure()
     ax = fig.add_subplot()
@@ -49,6 +51,7 @@ def fft_plot():
     ax.plot(fft_data["x"], fft_data["y"])
     plt.show()
 
+# plot histogram about noise data
 def noise_plot(x_data:dict):
     fig = plt.figure()
     ax = fig.add_subplot()
@@ -59,20 +62,26 @@ def noise_plot(x_data:dict):
     ax.hist(x_data, bins=10000)     # TODO 사용되지 않는 주파수 대역 찾아내기
     plt.show()
 
+# create/write noise_data.json file
+def noise_write(noise_data:dict, noise_list):
+    noise_data["noise_list"] = noise_list
+    jsonE.dumps("noise_data", noise_data)
 
 # main
 noise_data = defaultdict(int)
 noise_list = []
 
-max_time = 10   # sec
+max_time = 10   # mesure time [sec]
 
 try:
     start_time = t.time()
     while True:
+        # measure time check
         mes_time = t.time() - start_time
         print(mes_time)
         if mes_time > max_time:
             break
+
         fft_data = audio_fft()
         for i, y in enumerate(fft_data["y"]):
             if y > 3:
@@ -81,13 +90,10 @@ try:
                 try: noise_data[data_x] += 1
                 except: noise_data[data_x] = 1
                 noise_list.append(data_x)
-        # fft_plot()
-    noise_data["noise_list"] = noise_list
-    # print(noise_data)
-    jsonE.dumps("noise_data", noise_data)
+    noise_write(noise_data, noise_list)
     noise_plot(noise_list)
+    # fft_plot()
 except:
-    noise_data["noise_list"] = noise_list
-    # print(noise_data)
-    jsonE.dumps("noise_data", noise_data)
+    noise_write(noise_data, noise_list)
     noise_plot(noise_list)
+    # fft_plot()
